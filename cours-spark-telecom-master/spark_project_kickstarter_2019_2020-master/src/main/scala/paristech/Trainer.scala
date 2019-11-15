@@ -1,8 +1,17 @@
 package paristech
 
 import org.apache.spark.SparkConf
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.ml.feature.{CountVectorizer, IDF, OneHotEncoderEstimator, RegexTokenizer, StringIndexer}
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.classification.LogisticRegression
+import org.apache.spark.ml.feature.StopWordsRemover
 
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.evaluation.MulticlassClassificationEvaluator
+import org.apache.spark.ml.tuning.{ParamGridBuilder, TrainValidationSplit}
+
+import java.io.File
 
 object Trainer {
 
@@ -25,6 +34,10 @@ object Trainer {
       .config(conf)
       .appName("TP Spark : Trainer")
       .getOrCreate()
+
+    println("/////////////////////////////////////////////////////////////////////////////////////")
+    println("//                    TP 3 : Machine learning avec Spark                           //")
+    println("/////////////////////////////////////////////////////////////////////////////////////")
 
 
     /*******************************************************************************

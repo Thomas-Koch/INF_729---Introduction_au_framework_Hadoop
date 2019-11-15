@@ -128,7 +128,7 @@ object Preprocessor {
 
     val monDataFrameFinal: DataFrame = dfCountry2
 
-    monDataFrameFinal.write.parquet("/home/p5hngk/Downloads/GitHub/INF_729---Introduction_au_framework_Hadoop/cours-spark-telecom-master/monDataFrameFinal")
+    monDataFrameFinal.write.mode("overwrite").parquet("/home/p5hngk/Downloads/GitHub/INF_729---Introduction_au_framework_Hadoop/cours-spark-telecom-master/monDataFrameFinal")
 
     println("\n")
     println("Hello World ! from Preprocessor")
