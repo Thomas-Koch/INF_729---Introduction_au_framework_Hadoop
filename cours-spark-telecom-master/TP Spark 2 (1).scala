@@ -157,7 +157,12 @@ test.filter($"days_campaign" === -1).count
 test.printSchema
 
 val dfCountry8: DataFrame = dfCountry7
-    .na.fill(Map("currency2" -> "unknown", "country2" -> "unknown", "days_campaign" -> -1, "hours_prepa" -> -1, "goal" -> -1))
+  .withColumn("days_campaign", when($"days_campaign".isNull, -1).otherwise("$days_campaign"))
+  .withColumn("hours_prepa", when($"hours_prepa".isNull, -1).otherwise("$hours_prepa"))
+  .withColumn("goal", when($"goal".isNull, -1).otherwise("$goal"))
+  .withColumn("country2", when($"country2".isNull, "unknown").otherwise("$country2"))
+  .withColumn("currency2", when($"currency2".isNull, "unknown").otherwise("$currency2"))
+    //.na.fill(Map("currency2" -> "unknown", "country2" -> "unknown", "days_campaign" -> -1, "hours_prepa" -> -1, "goal" -> -1))
 
 dfCountry8.filter($"goal" === -1).count
 
